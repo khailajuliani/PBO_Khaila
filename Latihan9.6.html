@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Belajar JavaScript di duniakom.com</title>
+    <script type="text/javascript">
+        function tambah_semangat() {
+            var el_semangat = document.getElementById("div_semangat");
+            el_semangat.innerHTML += "Sedang Belajar JavaScript, Semangat !!!<br>";
+        }
+    </script>
+</head>
+<body>
+    <h2>Belajar JavaScript</h2>
+    <p>Saya sedang belajar JavaScript di duniakom.com </p>
+    <p>Klik tombol ini untuk menambahkan kalimat baru: 
+        <button onclick="tambah_semangat()">Semangat !!!</button>
+    </p>
+    <div id="div_semangat"></div>
+</body>
+</html>
