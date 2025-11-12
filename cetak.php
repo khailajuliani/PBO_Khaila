@@ -1,51 +1,54 @@
 <?php
-include ('koneksi.php');
+include('koneksi.php');
 $db = new database();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-    <style type="text/css">
-        form {background:border}
-        margin:0px 230px;
-        color:white;
+    <title>Cetak Data Barang</title>
+    <style>
+        /* CSS untuk cetak, seperti pengaturan tabel */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
     </style>
 </head>
-<body>
-    <h2>LAPORAN DATA BARANG CV JAYA</h2>
-    <table width="667" border="1">
-        <tr>
-            <th width="21">No</th>
-            <th width="122">Kode Barang</th>
-            <th width="158">Barang</th>
-            <th width="77">Stok</th>
-            <th width="72">Harga Beli</th>
-            <th width="83">Harga Jual</th>
-            <th width="114">Keuntungan</th>
-        </tr>
-        <?php
-        $data_barang = $db->tampil_data();
-        $no = 1;
-        foreach($data_barang as $row){
-        ?>
-        <tr>
-            <td><?php echo $no++; ?></td>
-            <td><?php echo $row['kd_barang']; ?></td>
-            <td><?php echo $row['nama_barang']; ?></td>
-            <td><?php echo $row['stok']; ?></td>
-            <td><?php echo $row['harga_beli']; ?></td>
-            <td><?php echo $row['harga_jual']; ?></td>
-            <td><?php echo $row['harga_jual']-$row['harga_beli']; ?></td>
-        </tr>
-        <?php
-        }
-        ?>
+<body onload="window.print()">
+    <center><h1>LAPORAN DATA BARANG</h1></center>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Stok</th>
+                <th>Harga Beli</th>
+                <th>Harga Jual</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $no = 1;
+            foreach($db->tampil_data() as $x){ // Asumsi memanggil fungsi tampil_data()
+            ?>
+            <tr>
+                <td><?php echo $no++; ?></td>
+                <td><?php echo $x['kd_barang']; ?></td>
+                <td><?php echo $x['nama_barang']; ?></td>
+                <td><?php echo $x['stok']; ?></td>
+                <td>Rp <?php echo number_format($x['harga_beli'], 0, ',', '.'); ?></td>
+                <td>Rp <?php echo number_format($x['harga_jual'], 0, ',', '.'); ?></td>
+            </tr>
+            <?php 
+            }
+            ?>
+        </tbody>
     </table>
-    <script>
-        window.print();
-    </script>
-    <a href="index.php">
-    <input type="submit" name="tombol" value="Kembali"></a>
 </body>
 </html>
